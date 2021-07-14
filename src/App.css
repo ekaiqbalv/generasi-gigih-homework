@@ -1,38 +1,56 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.app {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.page-container {
+  width: 80%;
+  margin: auto;
+}
+.section-title {
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.sub-section-title {
+  color: white;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.playlist-container {
+  display: flex;
+}
+.card-container {
+  width: 200px;
+  background-color: #181818;
+  border-radius: 8px;
+  padding: 16px;
+}
+.card-container:hover {
+  background-color: #282828;
+}
+.album-image {
+  width: 100%;
+  border-radius: 8px;
+}
+.description-container {
+  color: white;
+}
+.track-name {
+  font-weight: bold;
+  margin-top: 16px;
+}
+.artist-name {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 300;
+}
+.album-name {
+  margin-top: 8px;
+  font-size: 14px;
+}
+.select-track-button {
+  width: 100%;
+  background-color: midnightblue;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 16px;
+  padding: 4px 0;
 }
