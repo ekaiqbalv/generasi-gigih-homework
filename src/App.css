@@ -4,8 +4,10 @@
 .page-container {
   width: 80%;
   margin: auto;
+  padding: 48px 0;
 }
 .section-title {
+  margin: 0;
   color: white;
 }
 .sub-section-title {

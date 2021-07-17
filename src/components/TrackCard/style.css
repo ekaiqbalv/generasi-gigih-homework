@@ -1,4 +1,7 @@
 .card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 192px;
   background-color: #181818;
   border-radius: 8px;
@@ -31,10 +34,10 @@
   width: 100%;
   background-color: midnightblue;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   color: white;
   cursor: pointer;
   font-weight: 600;
   margin-top: 16px;
-  padding: 4px 0;
+  padding: 6px 0;
 }
