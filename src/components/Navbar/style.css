@@ -1,0 +1,10 @@
+.navbar-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.navbar-container a {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+}
