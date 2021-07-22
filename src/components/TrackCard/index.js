@@ -1,11 +1,7 @@
 import "./style.css";
 
-const TrackCard = ({ trackName, album, artists }) => {
+const TrackCard = ({ trackName, album, artists, isSelected, onSelect }) => {
   let artistsName = artists.map((artist) => artist.name).join(", ");
-
-  const onClickSelectTrackButton = (trackName) => {
-    alert(`Clicked ${trackName}`);
-  };
 
   return (
     <div className="card-container">
@@ -19,11 +15,8 @@ const TrackCard = ({ trackName, album, artists }) => {
         <div className="artist-name">{artistsName}</div>
         <div className="album-name">{album.name}</div>
       </div>
-      <button
-        className="select-track-button"
-        onClick={() => onClickSelectTrackButton(trackName)}
-      >
-        Select
+      <button className="select-track-button" onClick={onSelect}>
+        {isSelected ? "Deselect" : "Select"}
       </button>
     </div>
   );

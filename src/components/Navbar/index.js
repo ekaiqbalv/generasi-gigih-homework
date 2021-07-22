@@ -1,11 +1,14 @@
+import {
+  AUTH_BASE_URL,
+  RESPONSE_TYPE,
+  CLIENT_ID,
+  SCOPE,
+  REDIRECT_URI,
+} from "../../constants/spotify";
 import "./style.css";
 
 const Navbar = ({ isLoggedIn }) => {
-  const SPOTIFY_AUTH_URL = `https://accounts.spotify.com/authorize?response_type=token&client_id=${encodeURIComponent(
-    process.env.REACT_APP_SPOTIFY_API_KEY
-  )}&scope=playlist-modify-private&redirect_uri=${encodeURIComponent(
-    process.env.REACT_APP_DEV_URL
-  )}`;
+  const SPOTIFY_AUTH_URL = `${AUTH_BASE_URL}?response_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&scope=${SCOPE}&redirect_uri=${REDIRECT_URI}`;
 
   return (
     <div className="navbar-container">
