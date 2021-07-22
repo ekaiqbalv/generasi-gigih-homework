@@ -56,10 +56,11 @@ const Home = () => {
       <h1 className="section-title">Playlists</h1>
       <input
         className="search-input"
+        placeholder="What track are you looking for?"
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <button
-        className="seatch-button"
+        className="search-button"
         onClick={() => handleSearch(searchQuery)}
       >
         Search
