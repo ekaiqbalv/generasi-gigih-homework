@@ -10,6 +10,7 @@ const Home = () => {
   const [token, setToken] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [tracks, setTracks] = useState([]);
+  const [selectedTrackUri, setSelectedTrackUri] = useState([]);
 
   useEffect(() => {
     if (window.location.hash) {
@@ -39,6 +40,16 @@ const Home = () => {
     }
   };
 
+  const handleSelectTrack = (trackUri) => {
+    if (selectedTrackUri.includes(trackUri)) {
+      setSelectedTrackUri([
+        ...selectedTrackUri.filter((uri) => uri !== trackUri),
+      ]);
+    } else {
+      setSelectedTrackUri([...selectedTrackUri, trackUri]);
+    }
+  };
+
   return (
     <div className="page-container">
       <Navbar isLoggedIn={token ? true : false} />
@@ -58,10 +69,12 @@ const Home = () => {
         {tracks.length > 0 &&
           tracks.map((track) => (
             <TrackCard
-              key={track.id}
+              key={track.uri}
               trackName={track.name}
               album={track.album}
               artists={track.artists}
+              isSelected={selectedTrackUri.includes(track.uri)}
+              onSelect={() => handleSelectTrack(track.uri)}
             />
           ))}
       </div>
