@@ -1,9 +1,10 @@
 .app {
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 .page-container {
-  width: 80%;
-  margin: auto;
+  width: 88%;
   padding: 48px 0;
 }
 .section-title {

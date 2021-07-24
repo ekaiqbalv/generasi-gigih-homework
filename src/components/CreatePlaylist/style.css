@@ -1,0 +1,32 @@
+.create-playlist {
+  margin-right: 24px;
+}
+.create-playlist-title {
+  margin: 0;
+  margin-bottom: 16px;
+}
+.create-playlist-input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+.create-playlist-input-group input,
+.create-playlist-input-group textarea {
+  width: inherit;
+  padding: 4px 4px;
+  margin-top: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
+.create-playlist button {
+  width: 100%;
+  padding: 6px;
+  margin-top: 8px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
