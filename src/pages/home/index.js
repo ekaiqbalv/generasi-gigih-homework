@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import queryString from "query-string";
 import axios from "axios";
-import { API_BASE_URL } from "../../constants/spotify";
-import Navbar from "../../components/Navbar";
-import SearchBar from "../../components/SearchBar";
-import CreatePlaylist from "../../components/CreatePlaylist";
-import TrackCard from "../../components/TrackCard";
+import { setToken } from "redux/actions/user";
+import { API_BASE_URL } from "constants/spotify";
+import Navbar from "components/Navbar";
+import SearchBar from "components/SearchBar";
+import CreatePlaylist from "components/CreatePlaylist";
+import TrackCard from "components/TrackCard";
 import "./style.css";
 
 const Home = () => {
-  const [token, setToken] = useState("");
+  const token = useSelector((state) => state.user.token);
+  const dispatch = useDispatch();
   const [user, setUser] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [tracks, setTracks] = useState([]);
@@ -23,9 +26,9 @@ const Home = () => {
     if (window.location.hash) {
       let params = queryString.parse(window.location.hash);
       window.location.hash = "";
-      setToken(params.access_token);
+      dispatch(setToken(params.access_token));
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (token) {
