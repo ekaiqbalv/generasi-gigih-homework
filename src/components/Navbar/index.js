@@ -4,7 +4,7 @@ import {
   CLIENT_ID,
   SCOPE,
   REDIRECT_URI,
-} from "../../constants/spotify";
+} from "constants/spotify";
 import "./style.css";
 
 const Navbar = ({ isLoggedIn }) => {

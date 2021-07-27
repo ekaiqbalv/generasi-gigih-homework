@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import queryString from "query-string";
 import axios from "axios";
-import { API_BASE_URL } from "../../constants/spotify";
-import Navbar from "../../components/Navbar";
-import SearchBar from "../../components/SearchBar";
-import CreatePlaylist from "../../components/CreatePlaylist";
-import TrackCard from "../../components/TrackCard";
+import { API_BASE_URL } from "constants/spotify";
+import Navbar from "components/Navbar";
+import SearchBar from "components/SearchBar";
+import CreatePlaylist from "components/CreatePlaylist";
+import TrackCard from "components/TrackCard";
 import "./style.css";
 
 const Home = () => {
