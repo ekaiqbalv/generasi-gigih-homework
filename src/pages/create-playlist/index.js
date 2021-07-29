@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import queryString from "query-string";
+import { useSelector } from "react-redux";
 import axios from "axios";
-import { setToken } from "redux/actions/user";
 import { API_BASE_URL } from "constants/spotify";
 import Navbar from "components/Navbar";
 import SearchBar from "components/SearchBar";
@@ -12,7 +10,6 @@ import "./style.css";
 
 const Page = () => {
   const token = useSelector((state) => state.user.token);
-  const dispatch = useDispatch();
   const [user, setUser] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [tracks, setTracks] = useState([]);
@@ -21,14 +18,6 @@ const Page = () => {
     title: "",
     description: "",
   });
-
-  useEffect(() => {
-    if (window.location.hash) {
-      let params = queryString.parse(window.location.hash);
-      window.location.hash = "";
-      dispatch(setToken(params.access_token));
-    }
-  }, [dispatch]);
 
   useEffect(() => {
     if (token) {

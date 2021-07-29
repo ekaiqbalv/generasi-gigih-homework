@@ -1,0 +1,19 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: white;
+}
+.login-button {
+  width: 100px;
+  background-color: midnightblue;
+  border-radius: 6px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 16px;
+  padding: 6px 0;
+}
