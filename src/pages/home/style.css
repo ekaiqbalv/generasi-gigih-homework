@@ -1,19 +1,19 @@
-.playlist-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(224px, 1fr));
-  gap: 24px;
-}
-.split-content {
+.home-container {
   display: flex;
-  width: 100%;
-  min-height: 100%;
-}
-.split-content-child-1 {
-  width: 25%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   color: white;
-  border-right: 1px solid white;
 }
-.split-content-child-2 {
-  width: 100%;
-  margin-left: 24px;
+.login-button {
+  width: 100px;
+  background-color: midnightblue;
+  border-radius: 6px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 16px;
+  padding: 6px 0;
 }

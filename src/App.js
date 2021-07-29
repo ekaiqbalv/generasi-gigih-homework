@@ -1,13 +1,23 @@
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import store from "redux/stores";
-import Home from "./pages/home";
+import PrivateRoute from "components/PrivateRoute";
+import HomePage from "pages/home";
+import CreatePlaylistPage from "pages/create-playlist";
 import "./App.css";
 
 const App = () => {
   return (
     <Provider store={store}>
       <div className="app">
-        <Home />
+        <Router>
+          <Switch>
+            <PrivateRoute path="/create-playlist">
+              <CreatePlaylistPage />
+            </PrivateRoute>
+            <Route path="/" component={HomePage} />
+          </Switch>
+        </Router>
       </div>
     </Provider>
   );
