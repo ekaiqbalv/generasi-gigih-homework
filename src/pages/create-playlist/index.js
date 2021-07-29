@@ -123,7 +123,7 @@ const Page = () => {
 
   return (
     <div className="page-container">
-      <Navbar isLoggedIn={token ? true : false} />
+      <Navbar />
       <div className="split-content">
         <div className="split-content-child-1">
           <CreatePlaylist
