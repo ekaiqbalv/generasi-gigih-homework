@@ -10,7 +10,7 @@ import CreatePlaylist from "components/CreatePlaylist";
 import TrackCard from "components/TrackCard";
 import "./style.css";
 
-const Home = () => {
+const Page = () => {
   const token = useSelector((state) => state.user.token);
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
@@ -172,4 +172,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Page;
