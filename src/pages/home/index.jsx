@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import queryString from "query-string";
-import { setToken } from "redux/actions/user";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import queryString from 'query-string';
+import { setToken } from 'redux/actions/user';
 import {
   AUTH_BASE_URL,
   RESPONSE_TYPE,
   CLIENT_ID,
   SCOPE,
   REDIRECT_URI,
-} from "constants/spotify";
-import "./style.css";
+} from 'constants/spotify';
+import './style.css';
 
 const Page = () => {
   const token = useSelector((state) => state.user.token);
@@ -19,8 +19,8 @@ const Page = () => {
 
   useEffect(() => {
     if (window.location.hash) {
-      let params = queryString.parse(window.location.hash);
-      window.location.hash = "";
+      const params = queryString.parse(window.location.hash);
+      window.location.hash = '';
       dispatch(setToken(params.access_token));
     }
   }, [dispatch]);

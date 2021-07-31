@@ -1,7 +1,10 @@
-import "./style.css";
+import React from 'react';
+import './style.css';
 
-const TrackCard = ({ trackName, album, artists, isSelected, onSelect }) => {
-  let artistsName = artists.map((artist) => artist.name).join(", ");
+const TrackCard = ({
+  trackName, album, artists, isSelected, onSelect,
+}) => {
+  const artistsName = artists.map((artist) => artist.name).join(', ');
 
   return (
     <div className="card-container">
@@ -15,8 +18,8 @@ const TrackCard = ({ trackName, album, artists, isSelected, onSelect }) => {
         <div className="artist-name">{artistsName}</div>
         <div className="album-name">{album.name}</div>
       </div>
-      <button className="select-track-button" onClick={onSelect}>
-        {isSelected ? "Deselect" : "Select"}
+      <button type="button" className="select-track-button" onClick={onSelect}>
+        {isSelected ? 'Deselect' : 'Select'}
       </button>
     </div>
   );

@@ -1,6 +1,6 @@
-import { SET_TOKEN } from "redux/actions/user";
+import { SET_TOKEN } from 'redux/actions/user';
 
-const INITIAL_STATE = { token: "" };
+const INITIAL_STATE = { token: '' };
 
 export default function userReducer(state = INITIAL_STATE, action) {
   switch (action.type) {

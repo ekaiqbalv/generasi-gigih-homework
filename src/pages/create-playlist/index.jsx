@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import { API_BASE_URL } from "constants/spotify";
-import Navbar from "components/Navbar";
-import SearchBar from "components/SearchBar";
-import CreatePlaylist from "components/CreatePlaylist";
-import TrackCard from "components/TrackCard";
-import "./style.css";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { API_BASE_URL } from 'constants/spotify';
+import Navbar from 'components/Navbar';
+import SearchBar from 'components/SearchBar';
+import CreatePlaylist from 'components/CreatePlaylist';
+import TrackCard from 'components/TrackCard';
+import './style.css';
 
 const Page = () => {
   const token = useSelector((state) => state.user.token);
   const [user, setUser] = useState({});
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [tracks, setTracks] = useState([]);
   const [selectedTrackUri, setSelectedTrackUri] = useState([]);
   const [formCreatePlaylist, setFormCreatePlaylist] = useState({
-    title: "",
-    description: "",
+    title: '',
+    description: '',
   });
 
   useEffect(() => {
@@ -24,14 +24,14 @@ const Page = () => {
       axios
         .get(`${API_BASE_URL}/me`, {
           headers: {
-            Authorization: "Bearer " + token,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => setUser(response.data))
         .catch((error) => {
           if (error.response.status === 400 || error.response.status === 401) {
             alert(
-              "There is something wrong, make sure you have been logged in!"
+              'There is something wrong, make sure you have been logged in!',
             );
           }
         });
@@ -55,9 +55,9 @@ const Page = () => {
         },
         {
           headers: {
-            Authorization: "Bearer " + token,
+            Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       if (selectedTrackUri.length > 0) {
         await axios.post(
@@ -67,17 +67,17 @@ const Page = () => {
           },
           {
             headers: {
-              Authorization: "Bearer " + token,
+              Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
       }
       setSelectedTrackUri([]);
-      alert("You have successfully created a new playlist!");
+      alert('You have successfully created a new playlist!');
       e.target.reset();
     } catch (error) {
       if (error.response.status === 400 || error.response.status === 401) {
-        alert("There is something wrong, make sure you have been logged in!");
+        alert('There is something wrong, make sure you have been logged in!');
       }
     }
   };
@@ -92,11 +92,11 @@ const Page = () => {
       axios
         .get(`${API_BASE_URL}/search`, {
           headers: {
-            Authorization: "Bearer " + token,
+            Authorization: `Bearer ${token}`,
           },
           params: {
             q: searchQuery,
-            type: "track",
+            type: 'track',
             limit: 12,
           },
         })
@@ -104,7 +104,7 @@ const Page = () => {
         .catch((error) => {
           if (error.response.status === 400 || error.response.status === 401) {
             alert(
-              "There is something wrong, make sure you have been logged in!"
+              'There is something wrong, make sure you have been logged in!',
             );
           }
         });
@@ -133,18 +133,18 @@ const Page = () => {
         </div>
         <div className="split-content-child-2">
           <h1 className="section-title">
-            Let's find something for your playlist
+            Lets find something for your playlist
           </h1>
           <SearchBar
             handleInputSearch={handleInputSearch}
             handleSearch={handleSearch}
           />
           <h2 className="sub-section-title">
-            {tracks.length > 0 && "Results"}
+            {tracks.length > 0 && 'Results'}
           </h2>
           <div className="playlist-container">
-            {tracks.length > 0 &&
-              tracks.map((track) => (
+            {tracks.length > 0
+              && tracks.map((track) => (
                 <TrackCard
                   key={track.uri}
                   trackName={track.name}
