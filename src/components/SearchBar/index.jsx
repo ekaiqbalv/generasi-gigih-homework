@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 
 const SearchBar = ({ handleInputSearch, handleSearch }) => (
-  <form onSubmit={handleSearch}>
+  <form className="search-bar" onSubmit={handleSearch}>
     <input
       className="search-input"
       placeholder="What track are you looking for?"

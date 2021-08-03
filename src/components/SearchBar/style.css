@@ -1,10 +1,12 @@
+.search-bar {
+  display: flex;
+}
 .search-input {
   width: 40%;
   font-size: 16px;
   border: none;
   border-radius: 4px 0 0 4px;
   outline: none;
-  margin-top: 16px;
   padding: 8px;
 }
 .search-button {
@@ -14,4 +16,13 @@
   border-radius: 0 4px 4px 0;
   cursor: pointer;
   padding: 8px;
+}
+@media screen and (max-width: 768px) {
+  .search-input {
+    width: 100%;
+    font-size: 14px;
+  }
+  .search-button {
+    font-size: 14px;
+  }
 }
