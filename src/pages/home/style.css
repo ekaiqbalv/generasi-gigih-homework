@@ -18,3 +18,7 @@
   margin-top: 16px;
   padding: 6px 0;
 }
+.login-button:hover{
+  color: white;
+  opacity: 0.8;
+}

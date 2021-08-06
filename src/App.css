@@ -1,3 +1,4 @@
+@import '~antd/dist/antd.dark.css';
 .app {
   min-height: 100vh;
   display: flex;
@@ -6,17 +7,4 @@
 .page-container {
   width: 88%;
   padding: 48px 0;
-}
-.section-title {
-  margin: 0 0 24px 0;
-  color: white;
-}
-.sub-section-title {
-  color: white;
-}
-@media screen and (max-width: 768px) {
-  .section-title {
-    margin: 24px 0 16px 0;
-    font-size: 28px;
-  }
 }
