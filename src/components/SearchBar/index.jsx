@@ -1,17 +1,17 @@
 import React from 'react';
+import { Input } from 'antd';
 import './style.css';
 
-const SearchBar = ({ handleInputSearch, handleSearch }) => (
-  <form className="search-bar" onSubmit={handleSearch}>
-    <input
-      className="search-input"
+const SearchBar = ({ handleSearch }) => (
+  <div className="search-bar">
+    <Input.Search
       placeholder="What track are you looking for?"
-      onChange={handleInputSearch}
+      size="large"
+      allowClear
+      enterButton
+      onSearch={(searchQuery) => handleSearch(searchQuery)}
     />
-    <button className="search-button" type="submit">
-      Search
-    </button>
-  </form>
+  </div>
 );
 
 export default SearchBar;

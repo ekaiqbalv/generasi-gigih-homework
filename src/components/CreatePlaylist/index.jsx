@@ -1,40 +1,45 @@
 import React from 'react';
+import {
+  Typography, Form, Input, Button,
+} from 'antd';
 import './style.css';
 
-const CreatePlaylist = ({
-  handleInputCreatePlaylist,
-  handleSubmitFormCreatePlaylist,
-}) => (
-  <div className="create-playlist">
-    <h2 className="create-playlist-title">Create Playlist</h2>
-    <form onSubmit={handleSubmitFormCreatePlaylist}>
-      <div className="create-playlist-input-group">
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          id="title"
+const CreatePlaylist = ({ handleSubmitFormCreatePlaylist }) => {
+  const [form] = Form.useForm();
+
+  return (
+    <div className="create-playlist">
+      <Typography.Title level={3}>Create Playlist</Typography.Title>
+      <Form
+        layout="vertical"
+        form={form}
+        onFinish={() => handleSubmitFormCreatePlaylist(form)}
+      >
+        <Form.Item
           name="title"
-          minLength="10"
-          onChange={handleInputCreatePlaylist}
-          placeholder="Add a title"
-          required
-        />
-      </div>
-      <div className="create-playlist-input-group">
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
+          label="Title"
+          rules={[{ required: true, min: 10 }]}
+        >
+          <Input placeholder="Add a title" allowClear />
+        </Form.Item>
+        <Form.Item
           name="description"
-          minLength="20"
-          rows="4"
-          onChange={handleInputCreatePlaylist}
-          placeholder="Add a description"
-          required
-        />
-      </div>
-      <button type="submit">Create</button>
-    </form>
-  </div>
-);
+          label="Description"
+          rules={[{ required: true, min: 20 }]}
+        >
+          <Input.TextArea
+            placeholder="Add a description"
+            autoSize={{ minRows: 2, maxRows: 6 }}
+            showCount
+            allowClear
+          />
+        </Form.Item>
+        <Button htmlType="submit" type="primary" block>
+          Create
+        </Button>
+      </Form>
+    </div>
+  );
+};
 
 export default CreatePlaylist;

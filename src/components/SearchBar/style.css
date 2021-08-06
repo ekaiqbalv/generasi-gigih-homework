@@ -1,28 +1,8 @@
-.search-bar {
-  display: flex;
+.search-bar .ant-input-search-button{
+  background-color: midnightblue;
+  border-color: midnightblue;
 }
-.search-input {
-  width: 40%;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px 0 0 4px;
-  outline: none;
-  padding: 8px;
-}
-.search-button {
-  font-size: 16px;
-  font-weight: 500;
-  border: none;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-  padding: 8px;
-}
-@media screen and (max-width: 768px) {
-  .search-input {
-    width: 100%;
-    font-size: 14px;
-  }
-  .search-button {
-    font-size: 14px;
-  }
+.search-bar .ant-input-search-button:hover{
+  background-color: rgba(25, 25, 112, 0.8);
+  border-color: rgba(25, 25, 112, 0.8);
 }

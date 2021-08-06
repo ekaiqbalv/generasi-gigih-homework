@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Typography, List, notification } from 'antd';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { API_BASE_URL } from 'constants/spotify';
@@ -10,8 +11,8 @@ import './style.css';
 
 const Page = () => {
   const token = useSelector((state) => state.user.token);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
-  const [searchQuery, setSearchQuery] = useState('');
   const [tracks, setTracks] = useState([]);
   const [selectedTrackUri, setSelectedTrackUri] = useState([]);
   const [formCreatePlaylist, setFormCreatePlaylist] = useState({
@@ -30,9 +31,11 @@ const Page = () => {
         .then((response) => setUser(response.data))
         .catch((error) => {
           if (error.response.status === 400 || error.response.status === 401) {
-            alert(
-              'There is something wrong, make sure you have been logged in!',
-            );
+            notification.error({
+              message: 'Error',
+              description:
+                'There is something wrong, make sure you have been logged in!',
+            });
           }
         });
     }
@@ -43,15 +46,15 @@ const Page = () => {
     setFormCreatePlaylist({ ...formCreatePlaylist, [name]: value });
   };
 
-  const handleSubmitFormCreatePlaylist = async (e) => {
-    e.preventDefault();
+  const handleSubmitFormCreatePlaylist = async (form) => {
+    const formData = form.getFieldsValue();
     try {
       const responseCreatePlaylist = await axios.post(
         `${API_BASE_URL}/users/${user.id}/playlists`,
         {
-          name: formCreatePlaylist.title,
+          name: formData.title,
           public: false,
-          description: formCreatePlaylist.description,
+          description: formData.description,
         },
         {
           headers: {
@@ -73,22 +76,25 @@ const Page = () => {
         );
       }
       setSelectedTrackUri([]);
-      alert('You have successfully created a new playlist!');
-      e.target.reset();
+      notification.success({
+        message: 'Success',
+        description: 'You have successfully created a new playlist!',
+      });
+      form.resetFields();
     } catch (error) {
       if (error.response.status === 400 || error.response.status === 401) {
-        alert('There is something wrong, make sure you have been logged in!');
+        notification.error({
+          message: 'Error',
+          description:
+            'There is something wrong, make sure you have been logged in!',
+        });
       }
     }
   };
 
-  const handleInputSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
+  const handleSearch = (searchQuery) => {
     if (searchQuery) {
+      setLoading(true);
       axios
         .get(`${API_BASE_URL}/search`, {
           headers: {
@@ -100,12 +106,17 @@ const Page = () => {
             limit: 12,
           },
         })
-        .then((response) => setTracks(response.data.tracks.items))
+        .then((response) => {
+          setTracks(response.data.tracks.items);
+          setLoading(false);
+        })
         .catch((error) => {
           if (error.response.status === 400 || error.response.status === 401) {
-            alert(
-              'There is something wrong, make sure you have been logged in!',
-            );
+            notification.error({
+              message: 'Error',
+              description:
+                'There is something wrong, make sure you have been logged in!',
+            });
           }
         });
     }
@@ -124,27 +135,36 @@ const Page = () => {
   return (
     <div className="page-container">
       <Navbar />
-      <div className="split-content">
-        <div className="split-content-child-1">
+      <div className="main-content">
+        <div className="create-playlist-content">
           <CreatePlaylist
             handleInputCreatePlaylist={handleInputCreatePlaylist}
             handleSubmitFormCreatePlaylist={handleSubmitFormCreatePlaylist}
           />
         </div>
-        <div className="split-content-child-2">
-          <h1 className="section-title">
+        <div className="search-track-content">
+          <Typography.Title level={2}>
             Lets find something for your playlist
-          </h1>
-          <SearchBar
-            handleInputSearch={handleInputSearch}
-            handleSearch={handleSearch}
-          />
-          <h2 className="sub-section-title">
+          </Typography.Title>
+          <SearchBar handleSearch={handleSearch} />
+          <Typography.Title level={4} className="result-title">
             {tracks.length > 0 && 'Results'}
-          </h2>
-          <div className="playlist-container">
-            {tracks.length > 0
-              && tracks.map((track) => (
+          </Typography.Title>
+          <List
+            className="track-list"
+            grid={{
+              gutter: [16, 16],
+              xs: 1,
+              sm: 2,
+              md: 3,
+              lg: 3,
+              xl: 4,
+              xxl: 6,
+            }}
+            dataSource={tracks}
+            loading={loading}
+            renderItem={(track) => (
+              <List.Item>
                 <TrackCard
                   key={track.uri}
                   trackName={track.name}
@@ -153,8 +173,9 @@ const Page = () => {
                   isSelected={selectedTrackUri.includes(track.uri)}
                   onSelect={() => handleSelectTrack(track.uri)}
                 />
-              ))}
-          </div>
+              </List.Item>
+            )}
+          />
         </div>
       </div>
     </div>
