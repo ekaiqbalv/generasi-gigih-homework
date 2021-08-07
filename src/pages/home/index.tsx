@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { Redirect } from 'react-router-dom';
 import queryString from 'query-string';
 import { setToken } from 'redux/actions/user';
@@ -12,14 +12,19 @@ import {
 } from 'constants/spotify';
 import './style.css';
 
-const Page = () => {
-  const token = useSelector((state) => state.user.token);
-  const dispatch = useDispatch();
+interface IParams {
+  // eslint-disable-next-line camelcase
+  access_token?: string;
+}
+
+export default function Page() {
+  const token = useAppSelector((state) => state.user.token);
+  const dispatch = useAppDispatch();
   const SPOTIFY_AUTH_URL = `${AUTH_BASE_URL}?response_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&scope=${SCOPE}&redirect_uri=${REDIRECT_URI}`;
 
   useEffect(() => {
     if (window.location.hash) {
-      const params = queryString.parse(window.location.hash);
+      const params: IParams = queryString.parse(window.location.hash);
       window.location.hash = '';
       dispatch(setToken(params.access_token));
     }
@@ -39,6 +44,4 @@ const Page = () => {
       )}
     </div>
   );
-};
-
-export default Page;
+}
