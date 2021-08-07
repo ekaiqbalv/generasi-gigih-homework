@@ -1,10 +1,15 @@
-import React from 'react';
 import {
   Typography, Form, Input, Button,
 } from 'antd';
 import './style.css';
 
-const CreatePlaylist = ({ handleSubmitFormCreatePlaylist }) => {
+interface ICreatePlaylistProps {
+  handleSubmitFormCreatePlaylist: Function;
+}
+
+const CreatePlaylist = ({
+  handleSubmitFormCreatePlaylist,
+}: ICreatePlaylistProps) => {
   const [form] = Form.useForm();
 
   return (

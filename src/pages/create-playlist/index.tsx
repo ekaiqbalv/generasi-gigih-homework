@@ -1,52 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Typography, List, notification } from 'antd';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import {
+  Typography, List, notification, FormInstance,
+} from 'antd';
+import { useAppSelector } from 'redux/hooks';
 import axios from 'axios';
 import { API_BASE_URL } from 'constants/spotify';
 import Navbar from 'components/Navbar';
 import SearchBar from 'components/SearchBar';
 import CreatePlaylist from 'components/CreatePlaylist';
 import TrackCard from 'components/TrackCard';
+import { ITrack } from 'utils/model';
 import './style.css';
 
 const Page = () => {
-  const token = useSelector((state) => state.user.token);
+  const user = useAppSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState({});
-  const [tracks, setTracks] = useState([]);
-  const [selectedTrackUri, setSelectedTrackUri] = useState([]);
-  const [formCreatePlaylist, setFormCreatePlaylist] = useState({
-    title: '',
-    description: '',
-  });
+  const [tracks, setTracks] = useState<Array<ITrack>>([]);
+  const [selectedTrackUri, setSelectedTrackUri] = useState<Array<string>>([]);
 
-  useEffect(() => {
-    if (token) {
-      axios
-        .get(`${API_BASE_URL}/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => setUser(response.data))
-        .catch((error) => {
-          if (error.response.status === 400 || error.response.status === 401) {
-            notification.error({
-              message: 'Error',
-              description:
-                'There is something wrong, make sure you have been logged in!',
-            });
-          }
-        });
-    }
-  }, [token]);
-
-  const handleInputCreatePlaylist = (e) => {
-    const { name, value } = e.target;
-    setFormCreatePlaylist({ ...formCreatePlaylist, [name]: value });
-  };
-
-  const handleSubmitFormCreatePlaylist = async (form) => {
+  const handleSubmitFormCreatePlaylist = async (form: FormInstance) => {
     const formData = form.getFieldsValue();
     try {
       const responseCreatePlaylist = await axios.post(
@@ -58,7 +30,7 @@ const Page = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
         },
       );
@@ -70,7 +42,7 @@ const Page = () => {
           },
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${user.token}`,
             },
           },
         );
@@ -92,13 +64,13 @@ const Page = () => {
     }
   };
 
-  const handleSearch = (searchQuery) => {
+  const handleSearch = (searchQuery: string) => {
     if (searchQuery) {
       setLoading(true);
       axios
         .get(`${API_BASE_URL}/search`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           params: {
             q: searchQuery,
@@ -122,7 +94,7 @@ const Page = () => {
     }
   };
 
-  const handleSelectTrack = (trackUri) => {
+  const handleSelectTrack = (trackUri: string) => {
     if (selectedTrackUri.includes(trackUri)) {
       setSelectedTrackUri([
         ...selectedTrackUri.filter((uri) => uri !== trackUri),
@@ -138,7 +110,6 @@ const Page = () => {
       <div className="main-content">
         <div className="create-playlist-content">
           <CreatePlaylist
-            handleInputCreatePlaylist={handleInputCreatePlaylist}
             handleSubmitFormCreatePlaylist={handleSubmitFormCreatePlaylist}
           />
         </div>
@@ -153,7 +124,7 @@ const Page = () => {
           <List
             className="track-list"
             grid={{
-              gutter: [16, 16],
+              gutter: 16,
               xs: 1,
               sm: 2,
               md: 3,
@@ -167,9 +138,7 @@ const Page = () => {
               <List.Item>
                 <TrackCard
                   key={track.uri}
-                  trackName={track.name}
-                  album={track.album}
-                  artists={track.artists}
+                  track={track}
                   isSelected={selectedTrackUri.includes(track.uri)}
                   onSelect={() => handleSelectTrack(track.uri)}
                 />
