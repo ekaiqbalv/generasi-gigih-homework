@@ -1,8 +1,11 @@
-import React from 'react';
 import { Input } from 'antd';
 import './style.css';
 
-const SearchBar = ({ handleSearch }) => (
+interface ISearchBarProps {
+  handleSearch: Function;
+}
+
+const SearchBar = ({ handleSearch }: ISearchBarProps) => (
   <div className="search-bar">
     <Input.Search
       placeholder="What track are you looking for?"
