@@ -17,7 +17,7 @@ interface IParams {
   access_token?: string;
 }
 
-export default function Page() {
+const Page = () => {
   const token = useAppSelector((state) => state.user.token);
   const dispatch = useAppDispatch();
   const SPOTIFY_AUTH_URL = `${AUTH_BASE_URL}?response_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&scope=${SCOPE}&redirect_uri=${REDIRECT_URI}`;
@@ -44,4 +44,6 @@ export default function Page() {
       )}
     </div>
   );
-}
+};
+
+export default Page;

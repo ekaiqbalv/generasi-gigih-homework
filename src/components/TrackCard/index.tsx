@@ -15,15 +15,16 @@ const TrackCard = ({ track, isSelected, onSelect }: ITrackCardProps) => {
     <div className="card-container">
       <div className="description-container">
         <img
+          data-testid="track-card-image"
           className="album-image"
           src={track.album.images[0].url}
           alt={track.album.name}
         />
-        <div className="track-name">{track.name}</div>
-        <div className="artist-name">{artistsName}</div>
-        <div className="album-name">{track.album.name}</div>
+        <div data-testid="track-card-track-name" className="track-name">{track.name}</div>
+        <div data-testid="track-card-artist-name" className="artist-name">{artistsName}</div>
+        <div data-testid="track-card-album-name" className="album-name">{track.album.name}</div>
       </div>
-      <button type="button" className="select-track-button" onClick={onSelect}>
+      <button data-testid="track-card-button" type="button" className="select-track-button" onClick={onSelect}>
         {isSelected ? 'Deselect' : 'Select'}
       </button>
     </div>
