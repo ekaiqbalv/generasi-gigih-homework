@@ -3,7 +3,9 @@ const API_BASE_URL = 'https://api.spotify.com/v1';
 const RESPONSE_TYPE = 'token';
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_API_KEY;
 const SCOPE = 'playlist-modify-private';
-const REDIRECT_URI = process.env.REACT_APP_DEV_URL;
+const REDIRECT_URI = process.env.NODE_ENV === 'production'
+  ? 'https://generasi-gigih-homework-one.vercel.app'
+  : 'http://localhost:3000';
 
 export {
   AUTH_BASE_URL,
