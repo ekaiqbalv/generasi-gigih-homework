@@ -1,10 +1,28 @@
-.create-playlist .ant-btn-primary {
+.create-playlist h3.ant-typography,
+.create-playlist .ant-form-item-label label {
+  color: white;
+}
+.create-playlist .ant-input-affix-wrapper,
+.create-playlist textarea {
+  border-radius: 4px;
+}
+.create-playlist .ant-input-affix-wrapper-focused,
+.create-playlist textarea:focus {
+  border-color: #4b03ab;
+}
+.create-playlist .ant-input-affix-wrapper:hover,
+.create-playlist textarea:hover {
+  border-color: #5c00c1 !important;
+}
+.create-playlist .ant-btn-primary,
+.create-playlist .ant-btn-primary:focus {
   margin-top: 8px;
-  border-color: midnightblue;
-  background-color: midnightblue;
+  background: #4b03ab;
+  border-color: #4b03ab;
+  border-radius: 6px;
+  font-weight: 600;
 }
 .create-playlist .ant-btn-primary:hover {
-  background-color: midnightblue;
-  border-color: midnightblue;
-  opacity: 0.8;
+  background: rgba(75, 3, 171, 0.8);
+  border-color: rgba(75, 3, 171, 0.8);
 }
