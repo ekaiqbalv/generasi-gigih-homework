@@ -1,8 +1,19 @@
-.search-bar .ant-input-search-button{
-  background-color: midnightblue;
-  border-color: midnightblue;
+.search-bar .ant-input-affix-wrapper {
+  border-radius: 6px 0 0 6px !important;
 }
-.search-bar .ant-input-search-button:hover{
-  background-color: rgba(25, 25, 112, 0.8);
-  border-color: rgba(25, 25, 112, 0.8);
+.search-bar .ant-input-affix-wrapper:focus,
+.search-bar .ant-input-affix-wrapper-focused {
+  border-color: #4b03ab !important;
+}
+.search-bar .ant-input-affix-wrapper:hover {
+  border-color: #5c00c1 !important;
+}
+.search-bar .ant-input-search-button {
+  background-color: #4b03ab;
+  border-color: #4b03ab;
+  border-radius: 0 6px 6px 0 !important;
+}
+.search-bar .ant-input-search-button:hover {
+  background-color: rgba(75, 3, 171, 0.8);
+  border-color: rgba(75, 3, 171, 0.8);
 }
