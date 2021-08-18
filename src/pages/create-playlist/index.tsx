@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import {
-  Typography, List, notification, FormInstance,
+  Typography,
+  List,
+  notification,
+  FormInstance,
 } from 'antd';
 import { useAppSelector } from 'redux/hooks';
 import axios from 'axios';
@@ -14,8 +17,17 @@ import './style.css';
 
 const Page = () => {
   const user = useAppSelector((state) => state.user);
+  const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
-  const [tracks, setTracks] = useState<Array<ITrack>>([]);
+  const [tracks, setTracks] = useState<ITrack>({
+    items: [],
+    href: '',
+    limit: 12,
+    next: '',
+    offset: 0,
+    previous: '',
+    total: 0,
+  });
   const [selectedTrackUri, setSelectedTrackUri] = useState<Array<string>>([]);
 
   const handleSubmitFormCreatePlaylist = async (form: FormInstance) => {
@@ -64,8 +76,8 @@ const Page = () => {
     }
   };
 
-  const handleSearch = (searchQuery: string) => {
-    if (searchQuery) {
+  const handleSearch = (query: string, page = 1, pageSize = 12) => {
+    if (query) {
       setLoading(true);
       axios
         .get(`${API_BASE_URL}/search`, {
@@ -73,13 +85,14 @@ const Page = () => {
             Authorization: `Bearer ${user.token}`,
           },
           params: {
-            q: searchQuery,
+            q: query,
             type: 'track',
-            limit: 12,
+            limit: pageSize,
+            offset: pageSize * page - pageSize,
           },
         })
         .then((response) => {
-          setTracks(response.data.tracks.items);
+          setTracks(response.data.tracks);
           setLoading(false);
         })
         .catch((error) => {
@@ -91,6 +104,9 @@ const Page = () => {
             });
           }
         });
+    }
+    if (query !== searchQuery) {
+      setSearchQuery(query);
     }
   };
 
@@ -119,7 +135,7 @@ const Page = () => {
           </Typography.Title>
           <SearchBar handleSearch={handleSearch} />
           <Typography.Title level={4} className="result-title">
-            {tracks.length > 0 && 'Results'}
+            {tracks.total > 0 && 'Results'}
           </Typography.Title>
           <List
             className="track-list"
@@ -132,8 +148,16 @@ const Page = () => {
               xl: 4,
               xxl: 6,
             }}
-            dataSource={tracks}
+            dataSource={tracks.items}
             loading={loading}
+            pagination={{
+              current: (tracks.offset + tracks.limit) / tracks.limit,
+              hideOnSinglePage: true,
+              total: Math.min(996, tracks.total),
+              pageSize: 12,
+              showSizeChanger: false,
+              onChange: (page, pageSize) => handleSearch(searchQuery, page, pageSize),
+            }}
             renderItem={(track) => (
               <List.Item>
                 <TrackCard

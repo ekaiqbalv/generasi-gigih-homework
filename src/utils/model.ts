@@ -15,9 +15,19 @@ export interface IAlbum {
   images: Array<IImage>;
 }
 
-export interface ITrack {
+export interface ITrackItem {
   uri: string;
   name: string;
   album: IAlbum;
   artists: Array<IArtist>;
+}
+
+export interface ITrack {
+  href: string;
+  items: Array<ITrackItem>;
+  limit: number;
+  next: string;
+  offset: number;
+  previous: string;
+  total: number;
 }
