@@ -1,14 +1,20 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import TrackCard from 'components/TrackCard';
-import { ITrack } from 'utils/model';
+import { ITrackItem } from 'utils/model';
 
-const trackProps: ITrack = {
+const trackProps: ITrackItem = {
   uri: 'spotify:track:2bEuh25NMtUEQGu6VqohPu',
   name: 'Timur',
   album: {
     id: '6EjtRvsWa1wRYJgeJOROI3',
     name: 'Agterplaas',
     images: [
+      {
+        url: 'https://i.scdn.co/image/ab67616d0000b273848d417028ad1eb2f8ff9c26',
+      },
+      {
+        url: 'https://i.scdn.co/image/ab67616d0000b273848d417028ad1eb2f8ff9c26',
+      },
       {
         url: 'https://i.scdn.co/image/ab67616d0000b273848d417028ad1eb2f8ff9c26',
       },
