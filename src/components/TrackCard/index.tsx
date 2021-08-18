@@ -1,9 +1,9 @@
 import { MouseEventHandler } from 'react';
-import { ITrack } from 'utils/model';
+import { ITrackItem } from 'utils/model';
 import './style.css';
 
 interface ITrackCardProps {
-  track: ITrack;
+  track: ITrackItem;
   isSelected: boolean;
   onSelect: MouseEventHandler<HTMLButtonElement>;
 }
@@ -17,7 +17,7 @@ const TrackCard = ({ track, isSelected, onSelect }: ITrackCardProps) => {
         <img
           data-testid="track-card-image"
           className="album-image"
-          src={track.album.images[0].url}
+          src={track.album.images[1].url}
           alt={track.album.name}
         />
         <div data-testid="track-card-track-name" className="track-name">{track.name}</div>
