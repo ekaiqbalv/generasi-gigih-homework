@@ -17,6 +17,9 @@
 .page-container .result-title {
   margin-top: 16px;
 }
+.page-container .track-list .ant-col {
+  padding-bottom: 16px;
+}
 .page-container .track-list .ant-col,
 .page-container .track-list .ant-col .ant-list-item {
   height: 100%;

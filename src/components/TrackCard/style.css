@@ -32,13 +32,12 @@
 }
 .select-track-button {
   width: 100%;
-  background-color: midnightblue;
+  background-color: #4b03ab;
   border: none;
   border-radius: 6px;
   color: white;
   cursor: pointer;
   font-weight: 600;
-  margin-top: 16px;
   padding: 6px 0;
 }
 .select-track-button:hover {
