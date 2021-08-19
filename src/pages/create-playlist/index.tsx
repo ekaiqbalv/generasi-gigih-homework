@@ -4,6 +4,8 @@ import {
   List,
   notification,
   FormInstance,
+  Collapse,
+  Badge,
 } from 'antd';
 import { useAppSelector } from 'redux/hooks';
 import axios from 'axios';
@@ -12,7 +14,8 @@ import Navbar from 'components/Navbar';
 import SearchBar from 'components/SearchBar';
 import CreatePlaylist from 'components/CreatePlaylist';
 import TrackCard from 'components/TrackCard';
-import { ITrack } from 'utils/model';
+import SelectedTrackCard from 'components/SelectedTrackCard';
+import { ITrack, ITrackItem } from 'utils/model';
 import './style.css';
 
 const Page = () => {
@@ -28,7 +31,7 @@ const Page = () => {
     previous: '',
     total: 0,
   });
-  const [selectedTrackUri, setSelectedTrackUri] = useState<Array<string>>([]);
+  const [selectedTrack, setSelectedTrack] = useState<Array<ITrackItem>>([]);
 
   const handleSubmitFormCreatePlaylist = async (form: FormInstance) => {
     const formData = form.getFieldsValue();
@@ -46,11 +49,11 @@ const Page = () => {
           },
         },
       );
-      if (selectedTrackUri.length > 0) {
+      if (selectedTrack.length > 0) {
         await axios.post(
           `${API_BASE_URL}/playlists/${responseCreatePlaylist.data.id}/tracks`,
           {
-            uris: selectedTrackUri,
+            uris: selectedTrack.map((track) => track.uri),
           },
           {
             headers: {
@@ -59,7 +62,7 @@ const Page = () => {
           },
         );
       }
-      setSelectedTrackUri([]);
+      setSelectedTrack([]);
       notification.success({
         message: 'Success',
         description: 'You have successfully created a new playlist!',
@@ -110,13 +113,16 @@ const Page = () => {
     }
   };
 
-  const handleSelectTrack = (trackUri: string) => {
-    if (selectedTrackUri.includes(trackUri)) {
-      setSelectedTrackUri([
-        ...selectedTrackUri.filter((uri) => uri !== trackUri),
+  const handleSelectTrack = (currentSelectedTrack: ITrackItem) => {
+    const selectedTrackUri = selectedTrack.map((item) => item.uri);
+    if (selectedTrackUri.includes(currentSelectedTrack.uri)) {
+      setSelectedTrack([
+        ...selectedTrack.filter(
+          (track) => track.uri !== currentSelectedTrack.uri,
+        ),
       ]);
     } else {
-      setSelectedTrackUri([...selectedTrackUri, trackUri]);
+      setSelectedTrack([...selectedTrack, currentSelectedTrack]);
     }
   };
 
@@ -163,14 +169,50 @@ const Page = () => {
                 <TrackCard
                   key={track.uri}
                   track={track}
-                  isSelected={selectedTrackUri.includes(track.uri)}
-                  onSelect={() => handleSelectTrack(track.uri)}
+                  isSelected={selectedTrack
+                    .map((item) => item.uri)
+                    .includes(track.uri)}
+                  onSelect={() => handleSelectTrack(track)}
                 />
               </List.Item>
             )}
           />
         </div>
       </div>
+      {selectedTrack.length > 0 && (
+        <Collapse
+          className="selected-track-collapse"
+          expandIconPosition="right"
+        >
+          <Collapse.Panel
+            header={(
+              <Badge
+                color="#4b03ab"
+                count={selectedTrack.length}
+                offset={[selectedTrack.length > 9 ? 16 : 10, 0]}
+              >
+                <div className="selected-track-collapse-title">
+                  The track you have selected
+                </div>
+              </Badge>
+            )}
+            key="selected-track"
+          >
+            <List
+              split={false}
+              dataSource={selectedTrack}
+              renderItem={(track) => (
+                <List.Item>
+                  <SelectedTrackCard
+                    track={track}
+                    onSelect={() => handleSelectTrack(track)}
+                  />
+                </List.Item>
+              )}
+            />
+          </Collapse.Panel>
+        </Collapse>
+      )}
     </div>
   );
 };
