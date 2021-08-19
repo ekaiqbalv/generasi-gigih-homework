@@ -1,11 +1,13 @@
+import { IImage } from 'utils/model';
+
 export const SET_TOKEN = 'SET_TOKEN';
 export const SET_USER = 'SET_USER';
 export const DELETE_USER = 'DELETE_USER';
 
 export interface IUser {
-  displayName: string;
-  email: string;
   id: string;
+  displayName: string;
+  images: Array<IImage>;
 }
 
 export function setToken(token: string = '') {

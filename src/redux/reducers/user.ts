@@ -1,6 +1,9 @@
 import { AnyAction } from 'redux';
 import {
-  IUser, SET_TOKEN, SET_USER, DELETE_USER,
+  IUser,
+  SET_TOKEN,
+  SET_USER,
+  DELETE_USER,
 } from 'redux/actions/user';
 
 interface IUserState extends IUser {
@@ -9,9 +12,13 @@ interface IUserState extends IUser {
 
 const INITIAL_STATE: IUserState = {
   token: '',
-  displayName: '',
-  email: '',
   id: '',
+  displayName: '',
+  images: [
+    {
+      url: '',
+    },
+  ],
 };
 
 export default function userReducer(state = INITIAL_STATE, action: AnyAction) {

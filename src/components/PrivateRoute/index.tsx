@@ -23,8 +23,8 @@ const PrivateRoute = ({ children, ...props }: IPrivateRouteProps) => {
           },
         })
         .then((response) => {
-          const { display_name: displayName, email, id } = response.data;
-          dispatch(setUser({ displayName, email, id }));
+          const { id, display_name: displayName, images } = response.data;
+          dispatch(setUser({ id, displayName, images }));
         })
         .catch((error) => {
           if (error.response.status === 400 || error.response.status === 401) {
