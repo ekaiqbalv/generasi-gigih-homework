@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import store from 'redux/stores';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from 'redux/stores';
 import PrivateRoute from 'components/PrivateRoute';
 import HomePage from 'pages/home';
 import CreatePlaylistPage from 'pages/create-playlist';
@@ -8,16 +9,18 @@ import './App.css';
 
 const App = () => (
   <Provider store={store}>
-    <div className="app">
-      <Router>
-        <Switch>
-          <PrivateRoute path="/create-playlist">
-            <CreatePlaylistPage />
-          </PrivateRoute>
-          <Route path="/" component={HomePage} />
-        </Switch>
-      </Router>
-    </div>
+    <PersistGate loading={null} persistor={persistor}>
+      <div className="app">
+        <Router>
+          <Switch>
+            <PrivateRoute path="/create-playlist">
+              <CreatePlaylistPage />
+            </PrivateRoute>
+            <Route path="/" component={HomePage} />
+          </Switch>
+        </Router>
+      </div>
+    </PersistGate>
   </Provider>
 );
 
