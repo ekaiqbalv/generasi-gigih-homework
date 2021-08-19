@@ -1,0 +1,30 @@
+.selected-track-card-container {
+  display: flex;
+}
+.selected-track-card-container .selected-track-card-image {
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+}
+.selected-track-card-container .selected-track-card-info {
+  margin-left: 8px;
+}
+.selected-track-card-container .selected-track-card-track-and-artist-name {
+  width: 96%;
+  color: white;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+.selected-track-card-container .selected-track-card-button {
+  align-self: center;
+}
+@media screen and (max-width: 768px) {
+  .selected-track-card-container {
+    width: 88%;
+  }
+}
