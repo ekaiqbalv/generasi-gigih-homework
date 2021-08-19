@@ -2,9 +2,39 @@
   display: flex;
   justify-content: flex-end;
 }
-.navbar-container a {
-  font-size: 20px;
+.navbar-container .ant-dropdown-trigger {
   font-weight: 600;
   color: white;
-  text-decoration: none;
+  border-radius: 6px;
+}
+.dropdown-account-content {
+  background-color: #141414;
+  border-radius: 8px;
+  padding: 16px !important;
+}
+.dropdown-account-content .user-info {
+  display: flex;
+  margin-bottom: 20px;
+}
+.dropdown-account-content .user-info-name {
+  margin-left: 12px;
+}
+.dropdown-account-content .user-info-display-name {
+  color: white;
+  font-weight: bold;
+}
+.dropdown-account-content .logout-button {
+  font-weight: 600;
+  border-radius: 6px;
+}
+.dropdown-account-content .logout-button:hover {
+  color: white;
+  background: #a61d24;
+}
+.ant-btn.dropdown-account-trigger:hover {
+  color: white;
+}
+.ant-btn.dropdown-account-trigger:focus {
+  color: white;
+  background: transparent;
 }
