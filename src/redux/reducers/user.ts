@@ -1,5 +1,7 @@
 import { AnyAction } from 'redux';
-import { IUser, SET_TOKEN, SET_USER } from 'redux/actions/user';
+import {
+  IUser, SET_TOKEN, SET_USER, DELETE_USER,
+} from 'redux/actions/user';
 
 interface IUserState extends IUser {
   token: string;
@@ -18,6 +20,8 @@ export default function userReducer(state = INITIAL_STATE, action: AnyAction) {
       return { ...state, token: action.payload };
     case SET_USER:
       return { ...state, ...action.payload };
+    case DELETE_USER:
+      return INITIAL_STATE;
     default:
       return state;
   }
