@@ -3,7 +3,7 @@ import { Route, Redirect, RouteProps } from 'react-router-dom';
 import { notification } from 'antd';
 import axios from 'axios';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
-import { setUser } from 'redux/actions/user';
+import { setUser, deleteUser } from 'redux/actions/user';
 import { API_BASE_URL } from 'constants/spotify';
 
 interface IPrivateRouteProps extends RouteProps {
@@ -27,12 +27,14 @@ const PrivateRoute = ({ children, ...props }: IPrivateRouteProps) => {
           dispatch(setUser({ id, displayName, images }));
         })
         .catch((error) => {
-          if (error.response.status === 400 || error.response.status === 401) {
-            notification.error({
-              message: 'Error',
-              description:
-                'There is something wrong, make sure you have been logged in!',
-            });
+          notification.error({
+            message: 'Error',
+            description: `There is something wrong. ${error.response.data.error.message}!`,
+          });
+          if (
+            error.response.data.error.message === 'The access token expired'
+          ) {
+            dispatch(deleteUser());
           }
         });
     }
