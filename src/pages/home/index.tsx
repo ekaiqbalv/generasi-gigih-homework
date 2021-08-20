@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Typography } from 'antd';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { Redirect } from 'react-router-dom';
 import queryString from 'query-string';
@@ -36,7 +37,12 @@ const Page = () => {
         <Redirect to="/create-playlist" />
       ) : (
         <div className="home-container">
-          <h1>Create your own playlist!</h1>
+          <Typography.Title level={1}>
+            Create your own playlist!
+          </Typography.Title>
+          <Typography.Title level={4}>
+            Find and create based on your taste in music
+          </Typography.Title>
           <a className="login-button" href={SPOTIFY_AUTH_URL}>
             Login
           </a>

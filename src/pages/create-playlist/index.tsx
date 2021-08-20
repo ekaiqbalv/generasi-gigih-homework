@@ -10,11 +10,13 @@ import {
 import { useAppSelector } from 'redux/hooks';
 import axios from 'axios';
 import { API_BASE_URL } from 'constants/spotify';
-import Navbar from 'components/Navbar';
-import SearchBar from 'components/SearchBar';
-import CreatePlaylist from 'components/CreatePlaylist';
-import TrackCard from 'components/TrackCard';
-import SelectedTrackCard from 'components/SelectedTrackCard';
+import {
+  Navbar,
+  SearchBar,
+  CreatePlaylist,
+  TrackCard,
+  SelectedTrackCard,
+} from 'components';
 import { ITrack, ITrackItem } from 'utils/model';
 import './style.css';
 

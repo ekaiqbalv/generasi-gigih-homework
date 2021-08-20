@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from 'redux/stores';
 import PrivateRoute from 'components/PrivateRoute';
-import HomePage from 'pages/home';
-import CreatePlaylistPage from 'pages/create-playlist';
+import { HomePage, CreatePlaylistPage } from 'pages';
 import './App.css';
 
 const App = () => (
