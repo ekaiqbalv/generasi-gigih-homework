@@ -7,7 +7,8 @@ import {
   Collapse,
   Badge,
 } from 'antd';
-import { useAppSelector } from 'redux/hooks';
+import { useAppSelector, useAppDispatch } from 'redux/hooks';
+import { deleteUser } from 'redux/actions/user';
 import axios from 'axios';
 import { API_BASE_URL } from 'constants/spotify';
 import {
@@ -22,6 +23,7 @@ import './style.css';
 
 const Page = () => {
   const user = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [tracks, setTracks] = useState<ITrack>({
@@ -71,12 +73,12 @@ const Page = () => {
       });
       form.resetFields();
     } catch (error) {
-      if (error.response.status === 400 || error.response.status === 401) {
-        notification.error({
-          message: 'Error',
-          description:
-            'There is something wrong, make sure you have been logged in!',
-        });
+      notification.error({
+        message: 'Error',
+        description: `There is something wrong. ${error.response.data.error.message}!`,
+      });
+      if (error.response.data.error.message === 'The access token expired') {
+        dispatch(deleteUser());
       }
     }
   };
@@ -101,12 +103,14 @@ const Page = () => {
           setLoading(false);
         })
         .catch((error) => {
-          if (error.response.status === 400 || error.response.status === 401) {
-            notification.error({
-              message: 'Error',
-              description:
-                'There is something wrong, make sure you have been logged in!',
-            });
+          notification.error({
+            message: 'Error',
+            description: `There is something wrong. ${error.response.data.error.message}!`,
+          });
+          if (
+            error.response.data.error.message === 'The access token expired'
+          ) {
+            dispatch(deleteUser());
           }
         });
     }
