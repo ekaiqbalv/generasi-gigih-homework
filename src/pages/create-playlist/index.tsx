@@ -136,12 +136,12 @@ const Page = () => {
     <div className="page-container">
       <Navbar />
       <div className="main-content">
-        <div className="create-playlist-content">
+        <div className="first-child-content">
           <CreatePlaylist
             handleSubmitFormCreatePlaylist={handleSubmitFormCreatePlaylist}
           />
         </div>
-        <div className="search-track-content">
+        <div className="second-child-content">
           <Typography.Title level={2}>
             Lets find something for your playlist
           </Typography.Title>
